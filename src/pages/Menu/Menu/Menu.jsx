@@ -29,35 +29,35 @@ const Menu = () => {
                 <Cover img={menuBg} title={"Our Menu"}></Cover>
                 <div className="my-32 max-w-screen-lg mx-auto">
                     <SectionTitle heading={"today's offer"} subHeading={"Don't Miss"}></SectionTitle>
-                    <MenuCategory items={offered}></MenuCategory>
+                    <MenuCategory items={offered} title={"offered"}></MenuCategory>
                 </div>
             </div>
             {/* desert */}
             <div>
-                <Cover title={"Desserts"} img={dessertBg}></Cover>
+                <Cover title={"desserts"} img={dessertBg}></Cover>
                 <div className="my-32 max-w-screen-lg mx-auto">
-                    <MenuCategory items={dessert}></MenuCategory>
+                    <MenuCategory items={dessert} title={"dessert"}></MenuCategory>
                 </div>
             </div>
             {/* pizza */}
             <div>
-                <Cover title={"Pizzas"} img={pizzaBg}></Cover>
+                <Cover title={"pizzas"} img={pizzaBg}></Cover>
                 <div className="my-32 max-w-screen-lg mx-auto">
-                    <MenuCategory items={pizza}></MenuCategory>
+                    <MenuCategory items={pizza} title={"pizza"}></MenuCategory>
                 </div>
             </div>
             {/* soup */}
             <div>
-                <Cover title={"Soups"} img={soupBg}></Cover>
+                <Cover title={"soups"} img={soupBg}></Cover>
                 <div className="my-32 max-w-screen-lg mx-auto">
-                    <MenuCategory items={soup}></MenuCategory>
+                    <MenuCategory items={soup} title={"soup"}></MenuCategory>
                 </div>
             </div>
             {/* salads */}
             <div>
-                <Cover title={"Salads"} img={saladBg}></Cover>
+                <Cover title={"salads"} img={saladBg}></Cover>
                 <div className="my-32 max-w-screen-lg mx-auto">
-                    <MenuCategory items={salad}></MenuCategory>
+                    <MenuCategory items={salad} title={"salad"}></MenuCategory>
                 </div>
             </div>
         </div>
