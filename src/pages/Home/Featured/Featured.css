@@ -1,0 +1,10 @@
+.featured {
+    background-image: url('../../../assets/home/banner.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+.featured button{
+    color: white;
+}
