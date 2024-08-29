@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import MenuItem from '../../Shared/MenuItem/MenuItem';
+import Button from '../../../components/Button/Button';
 
 const PopularMenu = () => {
     const [menu, setMenu] = useState([]);
-    useEffect(()=> {
+    useEffect(() => {
         fetch('menu.json')
-        .then(res => res.json())
-        .then(data => setMenu(data.filter(d => d.category === "popular")))
-    },[])
+            .then(res => res.json())
+            .then(data => setMenu(data.filter(d => d.category === "popular")))
+    }, [])
     return (
         <section className='max-w-screen-lg mx-auto'>
             <SectionTitle
@@ -18,10 +19,13 @@ const PopularMenu = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-8 my-12'>
                 {
                     menu.map(item => <MenuItem
-                    key={item._id}
-                    item={item}
+                        key={item._id}
+                        item={item}
                     ></MenuItem>)
                 }
+            </div>
+            <div className='text-center'>
+                <Button>View Full Menu</Button>
             </div>
         </section>
     );
