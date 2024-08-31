@@ -2,16 +2,47 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import useCart from '../../../hooks/useCart';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import Swal from 'sweetalert2';
 
 const MyCart = () => {
-    const [cart] = useCart();
+    const [cart, refetch] = useCart();
     const total = cart.reduce((sum, item) => item.price + sum, 0);
+
+    const handleDelete = id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:8000/carts/${id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount === 1) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "This item has been deleted.",
+                                icon: "success"
+                            });
+                            refetch();
+                        }
+                    })
+            }
+        });
+    }
+
     return (
-        <div>
+        <div className='w-full max-w-screen-md mx-auto'>
             <Helmet>
                 <title>My Cart - Bistro Boss Resturant</title>
             </Helmet>
-            <div className='max-w-screen-md mx-auto flex items-center justify-evenly font-bold text-center'>
+            <div className='flex items-center justify-evenly font-bold text-center mb-8'>
                 <h2>Total Orders: {cart.length}</h2>
                 <h2>Total Price: ${total}</h2>
                 <button className="btn text-white bg-[#D1A054] hover:bg-[#D1A054]">Pay</button>
@@ -19,7 +50,7 @@ const MyCart = () => {
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
-                    <thead>
+                    <thead className='bg-[#D1A054] text-white'>
                         <tr>
                             <th></th>
                             <th>Image</th>
@@ -50,7 +81,7 @@ const MyCart = () => {
                                 </td>
                                 <td className='text-end'>${item.price}</td>
                                 <td>
-                                    <button className="btn btn-square rounded-md text-xl bg-[#B91C1C] text-white"><RiDeleteBinLine></RiDeleteBinLine></button>
+                                    <button onClick={() => handleDelete(item._id)} className="btn btn-square btn-sm rounded-md text-md bg-[#B91C1C] text-white"><RiDeleteBinLine></RiDeleteBinLine></button>
                                 </td>
                             </tr>)
                         }

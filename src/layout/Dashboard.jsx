@@ -5,8 +5,10 @@ import { IoMdHome } from 'react-icons/io';
 import { MdMenu } from 'react-icons/md';
 import { NavLink, Outlet } from 'react-router-dom';
 import '../index.css';
+import useCart from '../hooks/useCart';
 
 const Dashboard = () => {
+    const [cart] = useCart();
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -25,7 +27,11 @@ const Dashboard = () => {
                         <li><NavLink to='/dashboard/home'><IoMdHome></IoMdHome> User Home</NavLink></li>
                         <li><NavLink to='/dashboard/reservations'><FaCalendarAlt></FaCalendarAlt> Reservations</NavLink></li>
                         <li><NavLink to='/dashboard/history'><FaWallet></FaWallet> Payment History</NavLink></li>
-                        <li><NavLink to='/dashboard/mycart'><FaShoppingCart></FaShoppingCart> My Cart</NavLink></li>
+                        <li>
+                            <NavLink to='/dashboard/mycart'><FaShoppingCart></FaShoppingCart> My Cart
+                                <div className="badge badge-neutral">{cart?.length || 0}</div>
+                            </NavLink>
+                        </li>
                         <div className="divider"></div>
                         <li><NavLink to="/"><IoMdHome></IoMdHome> Home</NavLink></li>
                         <li><NavLink to="/menu"><MdMenu></MdMenu> Menu</NavLink></li>
