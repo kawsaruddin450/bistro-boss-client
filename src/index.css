@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#dashboard-sidebar a.active {
+    color: white;
+}
+
+#dashboard-sidebar a {
+    background-color: transparent;
+}
