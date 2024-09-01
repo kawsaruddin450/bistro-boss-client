@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
     const googleSignIn = () => {
+        setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
     const logOut = () => {
@@ -42,14 +43,13 @@ const AuthProvider = ({ children }) => {
                 axios.post('http://localhost:8000/jwt', {email: currentUser.email})
                 .then(data => {
                     localStorage.setItem('access-token', data.data.token);
+                    setLoading(false);
                 })
             }
             else{
                 localStorage.removeItem('access-token');
+                setLoading(false);
             }
-
-
-            setLoading(false);
         });
         return () => {
             return unsubscribe();
