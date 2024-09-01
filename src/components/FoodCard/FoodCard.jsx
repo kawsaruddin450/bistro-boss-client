@@ -51,7 +51,7 @@ const FoodCard = ({ item }) => {
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
+                confirmButtonText: "Go to login!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate('/login', { state: { from: location } });

@@ -24,14 +24,26 @@ const SignUp = () => {
                 console.log(user);
                 updateUserProfile(data.name)
                     .then(() => {
-                        console.log(user);
-                        Swal.fire({
-                            title: "Congratulations!",
-                            text: "User has been created Successfully",
-                            icon: "success"
-                        });
-                        reset();
-                        navigate('/');
+                        const saveUser = { name: data.name, email: data.email };
+                        fetch('http://localhost:8000/users/', {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json",
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    Swal.fire({
+                                        title: "Congratulations!",
+                                        text: "User has been created Successfully",
+                                        icon: "success"
+                                    });
+                                    reset();
+                                    navigate('/');
+                                }
+                            })
                     }).catch(error => {
                         console.log(error.message);
                     })

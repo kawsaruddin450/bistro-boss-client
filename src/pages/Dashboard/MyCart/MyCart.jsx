@@ -38,13 +38,13 @@ const MyCart = () => {
     }
 
     return (
-        <div className='w-full max-w-screen-md mx-auto'>
+        <div className='w-full max-w-screen-md mx-auto my-12'>
             <Helmet>
                 <title>My Cart - Bistro Boss Resturant</title>
             </Helmet>
             <div className='flex items-center justify-evenly font-bold text-center mb-8'>
                 <h2>Total Orders: {cart.length}</h2>
-                <h2>Total Price: ${total}</h2>
+                <h2>Total Price: ${total.toFixed(2)}</h2>
                 <button className="btn text-white bg-[#D1A054] hover:bg-[#D1A054]">Pay</button>
             </div>
             <div className="overflow-x-auto">
