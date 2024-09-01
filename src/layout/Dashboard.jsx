@@ -8,12 +8,17 @@ import '../index.css';
 import useCart from '../hooks/useCart';
 import { ImSpoonKnife } from 'react-icons/im';
 import { TfiMenuAlt } from 'react-icons/tfi';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
     const [cart] = useCart();
 
     // TODO: load data from the server to have dynamic admin based on data
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [admin, refetch, isLoading] = useAdmin();
+    const isAdmin = admin?.admin;
+    console.log(isAdmin);
+    
 
     return (
         <div>

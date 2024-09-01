@@ -3,10 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import useCart from '../../../hooks/useCart';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import Swal from 'sweetalert2';
+import useAdmin from '../../../hooks/useAdmin';
 
 const MyCart = () => {
     const [cart, refetch] = useCart();
     const total = cart.reduce((sum, item) => item.price + sum, 0);
+    const [admin,] = useAdmin();
+    console.log(admin);
 
     const handleDelete = id => {
         Swal.fire({
