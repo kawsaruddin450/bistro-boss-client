@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { FaRegTrashAlt, FaUserShield } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 
 const AllUsers = () => {
@@ -11,6 +12,23 @@ const AllUsers = () => {
             return res.json();
         }
     })
+
+    const handleMakeAdmin = id => {
+        fetch(`http://localhost:8000/users/admin/${id}`, {
+            method: "PATCH"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount === 1) {
+                    Swal.fire({
+                        title: "Updated!",
+                        text: "This user is now an admin.",
+                        icon: "success"
+                    });
+                    refetch();
+                }
+            })
+    }
 
     const handleDelete = user => {
         //delete user
@@ -42,11 +60,11 @@ const AllUsers = () => {
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>
+                                <td className="text-center">
                                     {
                                         user.role === 'admin' ?
-                                        <div className="badge bg-[#D1A054] text-white badge-sm">Admin</div>
-                                        : <button className="btn btn-square bg-[#D1A054] text-white btn-sm hover:bg-[#D1A054]"><FaUserShield></FaUserShield></button>
+                                            <div className="badge text-[#D1A054]  badge-sm">Admin</div>
+                                            : <button onClick={() => handleMakeAdmin(user._id)} className="btn btn-square bg-[#D1A054] text-white btn-sm hover:bg-[#D1A054]"><FaUserShield></FaUserShield></button>
                                     }
                                 </td>
                                 <td>
