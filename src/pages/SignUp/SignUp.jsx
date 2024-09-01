@@ -8,7 +8,7 @@ import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 
 const SignUp = () => {
-    const { user, signUp, updateUserProfile } = useContext(AuthContext);
+    const { signUp, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
     const {
         register,

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -15,15 +15,26 @@ const SocialLogin = () => {
         googleSignIn()
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                const saveUser = { name: user.displayName, email: user.email };
+                fetch('http://localhost:8000/users/', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        // navigate(from, {replace: true});
+                    })
                 Swal.fire({
                     title: "Successful!",
                     text: "Logged in Successfully",
                     icon: "success"
                 });
-                navigate(from, {replace: true});
-            })
-            .catch(err => {
+                navigate(from, { replace: true });
+            }).catch(err => {
                 console.log(err.message);
             })
     }
