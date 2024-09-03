@@ -15,7 +15,7 @@ const Dashboard = () => {
 
     // TODO: load data from the server to have dynamic admin based on data
     // const isAdmin = true;
-    const [admin, refetch, isLoading] = useAdmin();
+    const [admin, refetch, isAdminLoading] = useAdmin();
     const isAdmin = admin?.admin;
     console.log(isAdmin);
     
@@ -38,7 +38,7 @@ const Dashboard = () => {
                             isAdmin ? <>
                                 {/* Sidebar content here */}
                                 <li><NavLink to='/dashboard/home'><IoMdHome></IoMdHome> Admin Home</NavLink></li>
-                                <li><NavLink to='/dashboard/reservations'><ImSpoonKnife></ImSpoonKnife> Add Items</NavLink></li>
+                                <li><NavLink to='/dashboard/addItem'><ImSpoonKnife></ImSpoonKnife> Add Items</NavLink></li>
                                 <li><NavLink to='/dashboard/history'><TfiMenuAlt></TfiMenuAlt> Manage Items</NavLink></li>
                                 <li><NavLink to='/dashboard/history'><FaBook></FaBook> Manage Bookings</NavLink></li>
                                 <li><NavLink to='/dashboard/allusers'><FaUsers></FaUsers> All Users</NavLink></li>
