@@ -1,24 +1,35 @@
 import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle'
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const AddItem = () => {
     const { register, handleSubmit, reset } = useForm();
+    const token = localStorage.getItem('access-token');
     const onSubmit = data => {
-        const {name, image, category, price, recipe} = data;
-        const menuItem = {name, image, category, price: parseFloat(price), recipe};
+        const { name, image, category, price, recipe } = data;
+        const menuItem = { name, image, category, price: parseFloat(price), recipe };
         console.log(menuItem);
 
         fetch(`http://localhost:8000/menu`, {
             method: "POST",
             headers: {
-                "content-type":"application/json"
+                "content-type": "application/json",
+                authorization: `bearer ${token}`
             },
             body: JSON.stringify(menuItem)
         }).then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: "Added!",
+                        text: "This item has been added.",
+                        icon: "success"
+                    });
+                    reset();
+                }
+            })
     };
 
 
