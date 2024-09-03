@@ -1,14 +1,25 @@
 import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle'
-import { FaUtensils } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
 const AddItem = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
-        console.log(data)
+        const {name, image, category, price, recipe} = data;
+        const menuItem = {name, image, category, price: parseFloat(price), recipe};
+        console.log(menuItem);
+
+        fetch(`http://localhost:8000/menu`, {
+            method: "POST",
+            headers: {
+                "content-type":"application/json"
+            },
+            body: JSON.stringify(menuItem)
+        }).then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
     };
-    console.log(errors);
 
 
     return (
@@ -32,13 +43,13 @@ const AddItem = () => {
                             <div className="label">
                                 <span className="label-text">Category *</span>
                             </div>
-                            <select {...register("firstName", { required: true })} className="select select-bordered">
-                                <option disabled selected>Pick one</option>
-                                <option>Salad</option>
-                                <option>Pizza</option>
-                                <option>Soup</option>
-                                <option>Dessert</option>
-                                <option>Drinks</option>
+                            <select defaultValue={"Pick One"} {...register("category", { required: true })} className="select select-bordered">
+                                <option disabled>Pick One</option>
+                                <option>salad</option>
+                                <option>pizza</option>
+                                <option>soup</option>
+                                <option>dessert</option>
+                                <option>drinks</option>
                             </select>
                         </label>
                         <label className="form-control w-full">
@@ -58,13 +69,13 @@ const AddItem = () => {
                             {...register("recipe", { required: true })}
                             className="textarea textarea-bordered h-32" placeholder="Recipe Details"></textarea>
                     </label>
-                    <label className="form-control w-full max-w-xs">
+                    <label className="form-control w-full">
                         <div className="label">
-                            <span className="label-text">Item Image *</span>
+                            <span className="label-text">Image Url *</span>
                         </div>
-                        <input type="file"
+                        <input type="text" placeholder="Image Url"
                             {...register("image", { required: true })}
-                            className="file-input file-input-bordered w-full max-w-xs" />
+                            className="input input-bordered w-full" />
                     </label>
                     <input type="submit" value={`Add Item`} className='btn bg-[#D1A054] rounded-none text-white mt-5 text-xl font-semibold' />
                 </form>
