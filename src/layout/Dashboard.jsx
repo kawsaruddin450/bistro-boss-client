@@ -39,7 +39,7 @@ const Dashboard = () => {
                                 {/* Sidebar content here */}
                                 <li><NavLink to='/dashboard/home'><IoMdHome></IoMdHome> Admin Home</NavLink></li>
                                 <li><NavLink to='/dashboard/addItem'><ImSpoonKnife></ImSpoonKnife> Add Items</NavLink></li>
-                                <li><NavLink to='/dashboard/history'><TfiMenuAlt></TfiMenuAlt> Manage Items</NavLink></li>
+                                <li><NavLink to='/dashboard/manageItems'><TfiMenuAlt></TfiMenuAlt> Manage Items</NavLink></li>
                                 <li><NavLink to='/dashboard/history'><FaBook></FaBook> Manage Bookings</NavLink></li>
                                 <li><NavLink to='/dashboard/allusers'><FaUsers></FaUsers> All Users</NavLink></li>
                             </>
