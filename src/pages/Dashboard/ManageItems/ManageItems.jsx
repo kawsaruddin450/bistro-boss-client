@@ -4,7 +4,6 @@ import useMenu from "../../../hooks/useMenu";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import Swal from "sweetalert2";
-import { useEffect } from "react";
 
 
 const ManageItems = () => {
