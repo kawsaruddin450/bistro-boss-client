@@ -7,7 +7,7 @@ import CheckoutForm from "./CheckoutForm";
 const stripePromise = loadStripe(import.meta.env.VITE_payment_pk);
 const Payment = () => {
     return (
-        <div>
+        <div className='w-full max-w-screen-md mx-auto my-12'>
             <Helmet>
                 <title>Payment - Bistro Boss Resturant</title>
             </Helmet>
