@@ -72,6 +72,7 @@ const CheckoutForm = ({ totalPrice, cart }) => {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price: totalPrice,
+                quantity: cart.length,
                 items: cart.map(item => item._id),
                 menuItems: cart.map(item => item.itemId),
                 itemNames: cart.map(item => item.name),
