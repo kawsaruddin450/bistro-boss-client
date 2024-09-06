@@ -14,19 +14,21 @@ const CheckoutForm = ({ totalPrice, cart }) => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch(`http://localhost:8000/create-payment-intent`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-                authorization: `bearer ${token}`
-            },
-            body: JSON.stringify({ price: totalPrice })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setClientSecret(data.clientSecret);
+        if (totalPrice > 0) {
+            fetch(`http://localhost:8000/create-payment-intent`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    authorization: `bearer ${token}`
+                },
+                body: JSON.stringify({ price: totalPrice })
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setClientSecret(data.clientSecret);
+                })
+        }
     }, [token, totalPrice])
 
     const handleSubmit = async (event) => {
@@ -71,6 +73,7 @@ const CheckoutForm = ({ totalPrice, cart }) => {
                 transactionId: paymentIntent.id,
                 price: totalPrice,
                 items: cart.map(item => item._id),
+                menuItems: cart.map(item => item.itemId),
                 itemNames: cart.map(item => item.name),
             }
             fetch(`http://localhost:8000/payments`, {
@@ -84,7 +87,7 @@ const CheckoutForm = ({ totalPrice, cart }) => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
-                    if (data.insertedId) {
+                    if (data.insertedResult.insertedId) {
                         Swal.fire({
                             title: "Paid!",
                             text: "This payment has been succeeded.",
