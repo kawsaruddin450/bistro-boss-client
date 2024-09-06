@@ -18,7 +18,7 @@ const Payment = () => {
             </Helmet>
             <SectionTitle heading="Payment" subHeading="Please Provide"></SectionTitle>
             <Elements stripe={stripePromise}>
-                <CheckoutForm totalPrice={totalPrice}></CheckoutForm>
+                <CheckoutForm totalPrice={totalPrice} cart={cart}></CheckoutForm>
             </Elements>
         </div>
     );
