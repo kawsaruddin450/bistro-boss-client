@@ -4,11 +4,14 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
+import useAdmin from "../../../hooks/useAdmin";
 
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [cart] = useCart();
+    const [admin] = useAdmin();
+    const isAdmin = admin?.admin;
 
     const handleLogOut = () => {
         logOut()
@@ -76,7 +79,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">{user?.displayName}</a>
+                    <Link to={isAdmin ? '/dashboard/adminhome' : '/dashboard/userhome'} className="btn">{user?.displayName}</Link>
                 </div>
             </div>
         </>

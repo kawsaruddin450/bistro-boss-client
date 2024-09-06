@@ -37,7 +37,7 @@ const Dashboard = () => {
                         {
                             isAdmin ? <>
                                 {/* Sidebar content here */}
-                                <li><NavLink to='/dashboard/home'><IoMdHome></IoMdHome> Admin Home</NavLink></li>
+                                <li><NavLink to='/dashboard/adminhome'><IoMdHome></IoMdHome> Admin Home</NavLink></li>
                                 <li><NavLink to='/dashboard/addItem'><ImSpoonKnife></ImSpoonKnife> Add Items</NavLink></li>
                                 <li><NavLink to='/dashboard/manageItems'><TfiMenuAlt></TfiMenuAlt> Manage Items</NavLink></li>
                                 <li><NavLink to='/dashboard/history'><FaBook></FaBook> Manage Bookings</NavLink></li>
@@ -45,7 +45,7 @@ const Dashboard = () => {
                             </>
                                 : <>
                                     {/* Sidebar content here */}
-                                    <li><NavLink to='/dashboard/home'><IoMdHome></IoMdHome> User Home</NavLink></li>
+                                    <li><NavLink to='/dashboard/userhome'><IoMdHome></IoMdHome> User Home</NavLink></li>
                                     <li><NavLink to='/dashboard/reservations'><FaCalendarAlt></FaCalendarAlt> Reservations</NavLink></li>
                                     <li><NavLink to='/dashboard/history'><FaWallet></FaWallet> Payment History</NavLink></li>
                                     <li>
